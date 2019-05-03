@@ -1,2 +1,2 @@
 # geotwitter
-Linking LikedGeoData with twitter
+Linking LinkedGeoData with twitter
