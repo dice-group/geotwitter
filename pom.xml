@@ -10,13 +10,19 @@
             <artifactId>twitter4j-stream</artifactId>
             <version>${twitter4j-stream.version}</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/com.opencsv/opencsv -->
-<dependency>
-    <groupId>com.opencsv</groupId>
-    <artifactId>opencsv</artifactId>
-    <version>4.0</version>
+
+        <dependency>
+			<groupId>org.apache.jena</groupId>
+			<artifactId>apache-jena-libs</artifactId>
+			<type>pom</type>
+			<version>2.13.0</version>
+			
+		</dependency>
+		<dependency> 
+    <groupId>com.opencsv</groupId> 
+    <artifactId>opencsv</artifactId> 
+    <version>4.6</version> 
 </dependency>
-        
     </dependencies>
 
     <properties>
