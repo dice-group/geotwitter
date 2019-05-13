@@ -1,0 +1,81 @@
+package readcsvplease;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.util.Iterator;
+import java.util.List;
+
+import org.apache.jena.riot.Lang;
+import org.apache.jena.riot.RDFDataMgr;
+
+import com.hp.hpl.jena.rdf.model.Model;
+import com.hp.hpl.jena.rdf.model.ModelFactory;
+import com.hp.hpl.jena.rdf.model.Property;
+import com.hp.hpl.jena.rdf.model.Resource;
+import com.hp.hpl.jena.vocabulary.RDF;
+import com.opencsv.bean.*;
+
+public class FinalCsvToRDF {
+
+	static Model model = ModelFactory.createDefaultModel();
+	static String SO = "http://sageproject.org/ontology#";
+	static String SR = "http://sageproject.org/resource#";
+
+	public static void main(String args[]) throws FileNotFoundException {
+		model.setNsPrefix("SO", SO);
+		model.setNsPrefix("SR", SR);
+		FileReader Reader = new FileReader("/home/suganya/sample1.csv");
+		List<Tweets> beans = new CsvToBeanBuilder(Reader).withType(Tweets.class).build().parse();
+		
+			for(int i=0; i<beans.size();i++)
+			{
+				createRDF(beans.get(i).getId(),beans.get(i).getCreatedTime(),beans.get(i).getText(),beans.get(i).getUserName(),beans.get(i).getLatitude(),beans.get(i).getLongitude(),beans.get(i).getRetweetCount(),beans.get(i).getLanguage(),beans.get(i).getFavoriteCount());
+				
+			}
+			RDFDataMgr.write(System.out, model, Lang.TTL);
+
+		}
+	
+
+	
+
+
+private static void createRDF(String id, String createdTime, String text, String userName, Double latitude,
+		Double longitude, String retweetCount, String language, String favoriteCount) {		
+		Property has_id = model.createProperty(SO + "has_ID");
+		Property has_createdtime = model.createProperty(SO + "has_createdTime");
+		Property has_username = model.createProperty(SO + "has_username");
+		Property has_latitude = model.createProperty(SO + "has_latitude");
+		Property has_longitude = model.createProperty(SO + "has_longitude");
+		Property has_language = model.createProperty(SO + "has_language");
+		Property has_retweetcount = model.createProperty(SO + "has_retweetcount");
+		Property has_favoritecount = model.createProperty(SO + "has_favoriteCount");
+
+		Property has_geometry = model.createProperty(SO + "has_geometry");
+
+
+		Resource statement = model.createResource(SR+id);
+		Resource tweetType = model.createResource(SO + "tweet");
+		
+		 
+		  statement.addProperty(has_id,id);
+		  statement.addProperty(has_createdtime,createdTime);
+
+		  statement.addProperty(has_username,userName);
+		  statement.addProperty(has_latitude,latitude.toString());
+		  statement.addProperty(has_longitude,longitude.toString());
+		  statement.addProperty(has_retweetcount,retweetCount);
+		  statement.addProperty(has_favoritecount,favoriteCount);
+		  statement.addProperty(has_language,language);
+		 
+		  statement.addProperty(has_geometry,RDF.type);
+		 
+
+		statement.addProperty(RDF.type, tweetType);
+
+
+
+	}
+
+
+}
