@@ -1,7 +1,11 @@
 package readcsvplease;
 
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.Iterator;
 import java.util.List;
 
@@ -14,6 +18,11 @@ import com.hp.hpl.jena.rdf.model.Property;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.vocabulary.RDF;
 import com.opencsv.bean.*;
+import com.vividsolutions.jts.geom.Coordinate;
+import com.vividsolutions.jts.geom.Geometry;
+import com.vividsolutions.jts.geom.GeometryFactory;
+
+import com.vividsolutions.jts.geom.Point;
 
 public class FinalCsvToRDF {
 
@@ -21,18 +30,23 @@ public class FinalCsvToRDF {
 	static String SO = "http://sageproject.org/ontology#";
 	static String SR = "http://sageproject.org/resource#";
 
-	public static void main(String args[]) throws FileNotFoundException {
+	public static void main(String args[]) throws IOException {
 		model.setNsPrefix("SO", SO);
 		model.setNsPrefix("SR", SR);
 		FileReader Reader = new FileReader("/home/suganya/sample1.csv");
 		List<Tweets> beans = new CsvToBeanBuilder(Reader).withType(Tweets.class).build().parse();
+		OutputStream out = new FileOutputStream("output.ttl");
 		
 			for(int i=0; i<beans.size();i++)
 			{
 				createRDF(beans.get(i).getId(),beans.get(i).getCreatedTime(),beans.get(i).getText(),beans.get(i).getUserName(),beans.get(i).getLatitude(),beans.get(i).getLongitude(),beans.get(i).getRetweetCount(),beans.get(i).getLanguage(),beans.get(i).getFavoriteCount());
 				
 			}
-			RDFDataMgr.write(System.out, model, Lang.TTL);
+			//RDFDataMgr.write(System.out, model, Lang.TTL);
+			RDFDataMgr.write(out, model, Lang.TTL);
+
+			
+			
 
 		}
 	
@@ -52,6 +66,10 @@ private static void createRDF(String id, String createdTime, String text, String
 		Property has_favoritecount = model.createProperty(SO + "has_favoriteCount");
 
 		Property has_geometry = model.createProperty(SO + "has_geometry");
+		
+	        GeometryFactory geometryFactory = new GeometryFactory();
+	        Coordinate coord = new Coordinate(latitude, longitude);
+	        Geometry point = geometryFactory.createPoint(coord);
 
 
 		Resource statement = model.createResource(SR+id);
@@ -65,10 +83,9 @@ private static void createRDF(String id, String createdTime, String text, String
 		  statement.addProperty(has_latitude,latitude.toString());
 		  statement.addProperty(has_longitude,longitude.toString());
 		  statement.addProperty(has_retweetcount,retweetCount);
-		  statement.addProperty(has_favoritecount,favoriteCount);
-		  statement.addProperty(has_language,language);
-		 
-		  statement.addProperty(has_geometry,RDF.type);
+		  statement.addProperty(has_favoritecount,favoriteCount); 
+		  statement.addProperty(has_language,language);		 
+		statement.addProperty(has_geometry,point.toString());
 		 
 
 		statement.addProperty(RDF.type, tweetType);

@@ -23,6 +23,14 @@
     <artifactId>opencsv</artifactId> 
     <version>4.6</version> 
 </dependency>
+
+<!-- https://mvnrepository.com/artifact/com.vividsolutions/jts -->
+<dependency>
+    <groupId>com.vividsolutions</groupId>
+    <artifactId>jts</artifactId>
+    <version>1.8</version>
+</dependency>
+
     </dependencies>
 
     <properties>
