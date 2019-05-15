@@ -9,6 +9,8 @@ import java.io.OutputStream;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane.CloseAction;
+
 import org.apache.jena.riot.Lang;
 import org.apache.jena.riot.RDFDataMgr;
 
@@ -42,14 +44,21 @@ public class FinalCsvToRDF {
 				createRDF(beans.get(i).getId(),beans.get(i).getCreatedTime(),beans.get(i).getText(),beans.get(i).getUserName(),beans.get(i).getLatitude(),beans.get(i).getLongitude(),beans.get(i).getRetweetCount(),beans.get(i).getLanguage(),beans.get(i).getFavoriteCount());
 				
 			}
-			//RDFDataMgr.write(System.out, model, Lang.TTL);
-			RDFDataMgr.write(out, model, Lang.TTL);
+			RDFDataMgr.write(System.out, model, Lang.TTL);
+		//	RDFDataMgr.write(out, model, Lang.TTL);
 
 			
 			
 
 		}
 	
+	public static String cleanText(String text) {
+		text = text.replace("\n", "\\n");
+		text = text.replace("\t", "\\t");
+		text = text.replace(",", "");
+
+		return text;
+	}
 
 	
 
@@ -64,6 +73,8 @@ private static void createRDF(String id, String createdTime, String text, String
 		Property has_language = model.createProperty(SO + "has_language");
 		Property has_retweetcount = model.createProperty(SO + "has_retweetcount");
 		Property has_favoritecount = model.createProperty(SO + "has_favoriteCount");
+		Property has_text = model.createProperty(SO + "has_text");
+
 
 		Property has_geometry = model.createProperty(SO + "has_geometry");
 		
@@ -72,14 +83,16 @@ private static void createRDF(String id, String createdTime, String text, String
 	        Geometry point = geometryFactory.createPoint(coord);
 
 
-		Resource statement = model.createResource(SR+id);
-		Resource tweetType = model.createResource(SO + "tweet");
+		Resource statement = model.createResource("SR"+ ":"+id);
+		Resource tweetType = model.createResource(SO + "Tweet");
 		
 		 
 		  statement.addProperty(has_id,id);
 		  statement.addProperty(has_createdtime,createdTime);
 
 		  statement.addProperty(has_username,userName);
+		  statement.addProperty(has_text,cleanText(text));
+
 		  statement.addProperty(has_latitude,latitude.toString());
 		  statement.addProperty(has_longitude,longitude.toString());
 		  statement.addProperty(has_retweetcount,retweetCount);
