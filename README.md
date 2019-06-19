@@ -8,12 +8,14 @@ A tweet dataset [Tweets_Dataset](https://github.com/dice-group/geotwitter/blob/m
 
 The locations from the tweet are extracted using [FOX Extractor](http://aksw.org/Projects/FOX.html).
 
-The tweet dataset [Tweets_Dataset](https://github.com/dice-group/geotwitter/blob/master/Tweets_Dataset/) is then converted into a [RDF](https://github.com/dice-group/geotwitter/blob/master/Tweets_RDF.ttl)
+The tweet dataset [Tweets_Dataset](https://github.com/dice-group/geotwitter/blob/master/Tweets_Dataset/) is then converted into  [RDF](https://github.com/dice-group/geotwitter/blob/master/Tweets_RDF.ttl)
 
-The Tweets_RDF is uploaded in the Sparql server http://sparql.upb.de:8890/sparql in the graph http://sageproject.org/graph/Tweet.
+The final RDF is then uploaded in the Sparql server http://sparql.upb.de:8890/sparql in the graph http://sageproject.org/graph/Tweet.
 
 
 The endpoint is then linked to geodata using  [LIMES](http://dice.cs.uni-paderborn.de/projects/active-projects/limes/) to find tweets nearby Restaurants, Tourism Things, Hospitals, Supermarkets and Museums.
+
+Inside the folder Linking_Museum, You can find the LIMES configuration file used for linking the tweets with the http://linkedgeodata.org/ontology/Museum class and the ouput of the linking process. 
 
 
 
