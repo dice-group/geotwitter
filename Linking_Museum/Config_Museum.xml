@@ -28,15 +28,16 @@
 
     
 
+   
    <SOURCE>
-        <ID>finaloutputtweets</ID>
-        <ENDPOINT>/home/suganya/TheFinalOutput.ttl</ENDPOINT>
+        <ID>tweets</ID>
+        <ENDPOINT>http://sparql.upb.de:8890/sparql</ENDPOINT>
         <VAR>?x</VAR>
-        <PAGESIZE>-1</PAGESIZE>
+        <PAGESIZE>40000</PAGESIZE>
         <RESTRICTION>?x a SR:Tweet</RESTRICTION>
         <PROPERTY>SO:has_geometry RENAME point</PROPERTY>
-        <TYPE>TURTLE</TYPE>
-        </SOURCE>
+        
+    </SOURCE>
     
     <TARGET>
         <ID>lgd</ID>
