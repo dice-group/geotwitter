@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE LIMES SYSTEM "limes.dtd">
+<LIMES>
+    <PREFIX>
+        <NAMESPACE>http://geovocab.org/geometry#</NAMESPACE>
+        <LABEL>geom</LABEL>
+    </PREFIX>
+    <PREFIX>
+        <NAMESPACE>http://www.opengis.net/ont/geosparql#</NAMESPACE>
+        <LABEL>geos</LABEL>
+    </PREFIX>
+    <PREFIX>
+        <NAMESPACE>http://linkedgeodata.org/ontology/</NAMESPACE>
+        <LABEL>lgdo</LABEL>
+    </PREFIX>
+    <PREFIX>
+        <NAMESPACE>http://sageproject.org/ontology#</NAMESPACE>
+        <LABEL>SO</LABEL>
+    </PREFIX>
+    <PREFIX>
+        <NAMESPACE>http://sageproject.org/resource#</NAMESPACE>
+        <LABEL>SR</LABEL>
+    </PREFIX>
+    <PREFIX>
+        <NAMESPACE>http://www.w3.org/2000/01/rdf-schema#label</NAMESPACE>
+        <LABEL>RDFLABEL</LABEL>
+    </PREFIX>
+
+    
+
+   <SOURCE>
+        <ID>finaloutputtweets1</ID>
+        <ENDPOINT>http://sparql.upb.de:8890/sparql</ENDPOINT>
+        <VAR>?x</VAR>
+        <PAGESIZE>40000</PAGESIZE>
+        <RESTRICTION>?x a SR:Tweet</RESTRICTION>
+        <PROPERTY>SO:has_geometry RENAME point</PROPERTY>
+        
+        </SOURCE>
+    
+    <TARGET>
+        <ID>lgd</ID>
+        <ENDPOINT>http://sparql.upb.de:8890/sparql</ENDPOINT>
+        <VAR>?y</VAR>
+        <PAGESIZE>99172</PAGESIZE>
+        <RESTRICTION>?y a lgdo:TrainStation </RESTRICTION>
+        <PROPERTY>geom:geometry/geos:asWKT RENAME polygon</PROPERTY>
+    </TARGET>
+   <METRIC>geo_mean(point, polygon)</METRIC>   
+    <ACCEPTANCE>
+        <THRESHOLD>0.99</THRESHOLD>
+        <FILE>TrainStation.nt</FILE>
+        <RELATION>lgdo:near</RELATION>
+    </ACCEPTANCE>
+    <REVIEW>
+        <THRESHOLD>0.5</THRESHOLD>
+        <FILE>TrainStation_review.nt</FILE>
+        <RELATION>lgdo:near</RELATION>
+    </REVIEW>
+
+    <EXECUTION>
+        <REWRITER>default</REWRITER>
+        <PLANNER>default</PLANNER>
+        <ENGINE>default</ENGINE>
+    </EXECUTION>
+
+    <OUTPUT>NT</OUTPUT>
+</LIMES>

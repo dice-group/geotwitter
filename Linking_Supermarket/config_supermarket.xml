@@ -48,7 +48,7 @@
     </TARGET>
    <METRIC>geo_mean(point, polygon)</METRIC>   
     <ACCEPTANCE>
-        <THRESHOLD>0.9</THRESHOLD>
+        <THRESHOLD>0.99</THRESHOLD>
         <FILE>supermarket.nt</FILE>
         <RELATION>lgdo:near</RELATION>
     </ACCEPTANCE>
