@@ -10,6 +10,11 @@ The locations from the tweet are extracted using FOX Extractor.
 
 The tweet dataset(Tweets_Dataset) is then converted into a RDF(Tweets_RDF).
 
+The Tweets_RDF is uploaded in the Sparql server http://sparql.upb.de:8890/sparql in the graph http://sageproject.org/graph/Tweet.
+
+
+The endpoint is then linked to geodata using LIMES to find tweets nearby Restaurants, Tourism Things, Hospitals, Supermarkets and Museums.
+
 
 
 
