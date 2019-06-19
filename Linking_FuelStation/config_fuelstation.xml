@@ -43,18 +43,18 @@
         <ENDPOINT>http://sparql.upb.de:8890/sparql</ENDPOINT>
         <VAR>?y</VAR>
         <PAGESIZE>99172</PAGESIZE>
-        <RESTRICTION>?y a lgdo:Supermarket </RESTRICTION>
+        <RESTRICTION>?y a lgdo:FuelStation </RESTRICTION>
         <PROPERTY>geom:geometry/geos:asWKT RENAME polygon</PROPERTY>
     </TARGET>
    <METRIC>geo_mean(point, polygon)</METRIC>   
     <ACCEPTANCE>
-        <THRESHOLD>0.9</THRESHOLD>
-        <FILE>Hospital_near.nt</FILE>
+        <THRESHOLD>0.99</THRESHOLD>
+        <FILE>FuelStation.nt</FILE>
         <RELATION>lgdo:near</RELATION>
     </ACCEPTANCE>
     <REVIEW>
         <THRESHOLD>0.5</THRESHOLD>
-        <FILE>hospital_review.nt</FILE>
+        <FILE>FuelStation_review.nt</FILE>
         <RELATION>lgdo:near</RELATION>
     </REVIEW>
 
