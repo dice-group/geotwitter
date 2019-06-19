@@ -8,7 +8,7 @@ A twitter dataset containing 44997 tweets is created using the Twitter streaming
 
 The locations from the tweet are extracted using FOX Extractor.
 
-The tweet dataset(finaltweets) is then converted into a RDF(finaloutput.ttl).
+The tweet dataset(Tweets_Dataset) is then converted into a RDF(Tweets_RDF).
 
 
 
