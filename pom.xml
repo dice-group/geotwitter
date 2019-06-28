@@ -3,38 +3,52 @@
   <groupId>geotwitter</groupId>
   <artifactId>geotwitter</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <!-- https://mvnrepository.com/artifact/org.twitter4j/twitter4j-core -->
-    <dependencies>
-        <dependency>
-            <groupId>org.twitter4j</groupId>
-            <artifactId>twitter4j-stream</artifactId>
-            <version>${twitter4j-stream.version}</version>
-        </dependency>
-
-        <dependency>
-			<groupId>org.apache.jena</groupId>
-			<artifactId>apache-jena-libs</artifactId>
-			<type>pom</type>
-			<version>2.13.0</version>
-			
+ <repositories>
+		<repository>
+			<id>jitpack.io</id>
+			<url>https://jitpack.io</url>
+		</repository>
+	</repositories>
+	<dependencies>
+	
+	
+		<dependency>
+			<groupId>org.twitter4j</groupId>
+			<artifactId>twitter4j-stream</artifactId>
+			<version>${twitter4j-stream.version}</version>
 		</dependency>
-		<dependency> 
-    <groupId>com.opencsv</groupId> 
-    <artifactId>opencsv</artifactId> 
-    <version>4.6</version> 
-</dependency>
+	
 
-<!-- https://mvnrepository.com/artifact/com.vividsolutions/jts -->
-<dependency>
-    <groupId>com.vividsolutions</groupId>
-    <artifactId>jts</artifactId>
-    <version>1.8</version>
-</dependency>
+		<dependency>
+			<groupId>com.opencsv</groupId>
+			<artifactId>opencsv</artifactId>
+			<version>4.6</version>
+		</dependency>
+		
+		
+		<dependency>
+			<groupId>com.github.renespeck</groupId>
+			<artifactId>fox-java</artifactId>
+			<version>e67a2bd475</version>
+			<!-- <exclusions> <exclusion> <groupId>org.apache.jena</groupId> <artifactId>apache-jena-libs</artifactId> 
+				</exclusion> <exclusion> <groupId>org.apache.jena</groupId> <artifactId>jena-arq</artifactId> 
+				</exclusion> </exclusions> -->
+		</dependency>
 
-    </dependencies>
 
-    <properties>
-        <twitter4j-stream.version>4.0.6</twitter4j-stream.version>
-    </properties>
-  
+
+		<!-- https://mvnrepository.com/artifact/com.vividsolutions/jts -->
+		<dependency>
+			<groupId>com.vividsolutions</groupId>
+			<artifactId>jts</artifactId>
+			<version>1.8</version>
+		</dependency>
+
+	</dependencies>
+	
+	
+	<properties>
+		<twitter4j-stream.version>4.0.6</twitter4j-stream.version>
+	</properties>
+
 </project>
