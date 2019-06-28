@@ -17,6 +17,8 @@ The endpoint is then linked to geodata using  [LIMES](http://dice.cs.uni-paderbo
 
 Inside the folder Linking_Museum, You can find the LIMES configuration file used for linking the tweets with the http://linkedgeodata.org/ontology/Museum class and the ouput of the linking process. 
 
+The RSS feed from https://old.datahub.io/dataset/rss-500-nif-ner-corpus is also converted into RDF.
+
 
 
 
